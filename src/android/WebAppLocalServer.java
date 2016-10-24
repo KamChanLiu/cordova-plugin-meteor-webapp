@@ -322,7 +322,7 @@ public class WebAppLocalServer extends CordovaPlugin implements AssetBundleManag
         }
 
         // Else, revert to the initial asset bundle, unless that is what we are currently serving
-        else if (!currentAssetBundle.equals(assetBundleManager.initialAssetBundle)) {
+        if (!currentAssetBundle.equals(assetBundleManager.initialAssetBundle)) {
             pendingAssetBundle = assetBundleManager.initialAssetBundle;
         }
 

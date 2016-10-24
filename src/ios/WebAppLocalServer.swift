@@ -112,10 +112,10 @@ open class WebAppLocalServer: METPlugin, AssetBundleManagerDelegate {
         self?.revertToLastKnownGoodVersion()
       }
     }
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(WebAppLocalServer.pageDidLoad), name: NSNotification.Name.CDVPageDidLoad, object: webView)
 
     NotificationCenter.default.addObserver(self, selector: #selector(WebAppLocalServer.applicationDidEnterBackground), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+
+    NotificationCenter.default.addObserver(self, selector: #selector(WebAppLocalServer.pageDidLoad), name: NSNotification.Name.CDVPageDidLoad, object: webView)
   }
 
   func initializeAssetBundles() {
@@ -194,10 +194,7 @@ open class WebAppLocalServer: METPlugin, AssetBundleManagerDelegate {
       self.pendingAssetBundle = nil
     }
 
-    // Don't start the startup timer if the app started up in the background
-    if UIApplication.shared.applicationState == UIApplicationState.active {
-      startupTimer?.start(withTimeInterval: startupTimeoutInterval)
-    }
+    startupTimer?.start(withTimeInterval: startupTimeoutInterval)
   }
 
   // MARK: - Notifications
